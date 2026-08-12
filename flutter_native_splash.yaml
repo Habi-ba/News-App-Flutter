@@ -1,0 +1,30 @@
+flutter_native_splash:
+
+  color: "#FFFFFF"  ##====================================[REQUIRED]==========
+  color_dark: "#171717"
+
+  image: assets/images/splash/splash_light.png
+  image_dark: assets/images/splash/splash_dark.png
+
+  branding: assets/images/splash/branding_light.png
+  branding_dark: assets/images/splash/branding_dark.png
+
+  branding_mode: bottom                # default bottom
+  branding_bottom_padding: 26          # default 0
+
+  fullscreen: true                # default false
+
+  android_12:
+    # background color
+    color: "#FFFFFF"
+    color_dark: "#171717"
+    image: assets/images/splash/splash_light.png
+    image_dark: assets/images/splash/splash_dark.png
+
+    branding: assets/images/splash/branding_light.png
+    branding_dark: assets/images/splash/branding_dark.png
+
+    branding_mode: bottom                # default bottom
+    branding_bottom_padding: 26          # default 0
+
+    fullscreen: true                # default false
