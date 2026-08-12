@@ -1,0 +1,78 @@
+{
+  "home": "Home",
+  "@home": {
+    "description": "Home nav label"
+  },
+  "goodMorning": "Good Morning",
+  "@goodMorning": {
+    "description": "Morning greeting on home screen"
+  },
+  "hereIsSomeNewsForYou": "Here is Some News For You",
+  "@hereIsSomeNewsForYou": {
+    "description": "Subtitle under greeting"
+  },
+  "business": "Business",
+  "@business": {
+    "description": "News category"
+  },
+  "viewAll": "View All",
+  "@viewAll": {
+    "description": "Button to view all items in a category"
+  },
+  "general": "General",
+  "@general": {
+    "description": "News category"
+  },
+  "sports": "Sports",
+  "@sports": {
+    "description": "News category"
+  },
+  "technology": "Technology",
+  "@technology": {
+    "description": "News category"
+  },
+  "health": "Health",
+  "@health": {
+    "description": "News category"
+  },
+  "entertainment": "Entertainment",
+  "@entertainment": {
+    "description": "News category"
+  },
+  "science": "Science",
+  "@science": {
+    "description": "News category"
+  },
+  "goToHome": "Go To Home",
+  "@goToHome": {
+    "description": "Drawer item to navigate home"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Drawer section label for theme switch"
+  },
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark theme option"
+  },
+  "light": "Light",
+  "@light": {
+    "description": "Light theme option"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Drawer section label for language switch"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language option"
+  },
+  "arabic": "Arabic",
+  "@arabic": {
+    "description": "Arabic language option"
+  },
+  "viewFullArticle": "View Full Article",
+  "@viewFullArticle": {
+    "description": "Button to open full article"
+  }
+}
