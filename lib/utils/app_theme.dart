@@ -9,8 +9,13 @@ class AppTheme {
     dividerColor: AppColors.black,
     iconTheme: IconThemeData(color: AppColors.black),
     canvasColor: AppColors.lightGray,
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.white,
+      centerTitle: true,
+      titleTextStyle: AppStyles.med20Dark,
+    ),
     textTheme: TextTheme(
-      headlineSmall: AppStyles.med20White,
+      headlineSmall: AppStyles.med20Dark,
       titleLarge: AppStyles.med24Dark,
       labelMedium: AppStyles.bold20White,
       labelLarge: AppStyles.bold24Dark,
@@ -24,11 +29,16 @@ class AppTheme {
   static final ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.black,
     cardColor: AppColors.black,
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.black,
+      centerTitle: true,
+      titleTextStyle: AppStyles.med20White,
+    ),
     dividerColor: AppColors.white,
     iconTheme: IconThemeData(color: AppColors.white),
     canvasColor: AppColors.darkGray,
     textTheme: TextTheme(
-      headlineSmall: AppStyles.med20Dark,
+      headlineSmall: AppStyles.med20White,
       titleLarge: AppStyles.med24White,
       labelMedium: AppStyles.bold20White,
       labelLarge: AppStyles.bold24Dark,

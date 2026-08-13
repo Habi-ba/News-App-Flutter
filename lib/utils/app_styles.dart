@@ -56,12 +56,12 @@ class AppStyles {
   static TextStyle med14White = GoogleFonts.inter(
     color: AppColors.white,
     fontWeight: FontWeight.w500,
-    fontSize: 20,
+    fontSize: 14,
   );
   static TextStyle med14Black = GoogleFonts.inter(
     color: AppColors.black,
     fontWeight: FontWeight.w500,
-    fontSize: 20,
+    fontSize: 14,
   );
   static TextStyle med12Gray = GoogleFonts.inter(
     color: AppColors.gray,
