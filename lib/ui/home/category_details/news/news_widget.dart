@@ -6,6 +6,8 @@ import 'package:news/ui/home/widget/main_error_widget.dart';
 import 'package:news/ui/home/widget/main_loading_widget.dart';
 import 'package:news/utils/size_utils.dart';
 
+import 'new_item.dart';
+
 class NewsWidget extends StatefulWidget {
   const NewsWidget({super.key, required this.source});
 
@@ -51,14 +53,16 @@ class _NewsWidgetState extends State<NewsWidget> {
               ? Center(
                 child: Text(
                   'No News Found !',
-                  style: Theme.of(context).textTheme.labelLarge,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .bodyMedium,
                 ),
               )
               : ListView.separated(
                 itemBuilder: (context, index) {
-                  return Text(
-                    newsList[index].title ?? '',
-                    style: Theme.of(context).textTheme.headlineSmall,
+                  return NewsItem(
+                    news: newsList[index],
                   );
                 },
                 itemCount: newsList.length,
