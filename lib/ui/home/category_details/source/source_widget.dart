@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news/api/model/sources/source.dart';
+import 'package:news/ui/home/category_details/news/news_widget.dart';
 import 'package:news/ui/home/category_details/source/source_name.dart';
+import 'package:news/utils/size_utils.dart';
 
 class SourceWidget extends StatefulWidget {
   final List<Source> sourcesList;
@@ -18,27 +20,37 @@ class _SourceWidgetState extends State<SourceWidget> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: widget.sourcesList.length,
-      child: Column(
-        children: [
-          TabBar(
-            onTap: (index) {
-              selectedIndex = index;
-              setState(() {});
-            },
-            isScrollable: true,
-            tabAlignment: TabAlignment.start,
-            dividerColor: Colors.transparent,
-            indicatorColor: Theme.of(context).dividerColor,
-            tabs:
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal:
+        context.scaleWidth(16), vertical: context.scaleHeight(24)),
+        child: Center(
+          child: Column(
+            children: [
+              TabBar(
+                onTap: (index) {
+                  selectedIndex = index;
+                  setState(() {});
+                },
+                isScrollable: true,
+                tabAlignment: TabAlignment.start,
+                dividerColor: Colors.transparent,
+                indicatorColor: Theme
+                    .of(context)
+                    .dividerColor,
+                tabs:
                 widget.sourcesList.map((source) {
                   return SourceName(
                     source: source,
                     isSelected:
-                        selectedIndex == widget.sourcesList.indexOf(source),
+                    selectedIndex == widget.sourcesList.indexOf(source),
                   );
                 }).toList(),
+              ),
+              Expanded(
+                  child: NewsWidget(source: widget.sourcesList[selectedIndex]))
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
