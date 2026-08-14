@@ -10,7 +10,6 @@ class AppTheme {
     iconTheme: IconThemeData(color: AppColors.black),
     canvasColor: AppColors.lightGray,
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.white,
       color: AppColors.white,
       centerTitle: true,
       titleTextStyle: AppStyles.med20Dark,
@@ -31,7 +30,6 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.black,
     cardColor: AppColors.black,
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.black,
       color: AppColors.black,
       centerTitle: true,
       titleTextStyle: AppStyles.med20White,
