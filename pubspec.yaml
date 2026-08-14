@@ -72,6 +72,12 @@ flutter:
     - assets/images/light/
     - assets/images/dark/
     - assets/images/icons/
+    - lib/ui/home/
+    - lib/ui/home/drawer/
+    - lib/ui/home/widget/
+    - lib/ui/home/category_details/
+    - lib/ui/home/category_details/news/
+    - lib/ui/home/category_details/source/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

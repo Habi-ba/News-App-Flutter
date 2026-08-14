@@ -23,15 +23,15 @@ class AppStyles {
     fontWeight: FontWeight.w500,
     fontSize: 24,
   );
-  static TextStyle semiBold30Dark = GoogleFonts.inter(
+  static TextStyle med26Dark = GoogleFonts.inter(
     color: AppColors.black,
-    fontWeight: FontWeight.w700,
-    fontSize: 30,
+    fontWeight: FontWeight.w500,
+    fontSize: 26,
   );
-  static TextStyle semiBold30White = GoogleFonts.inter(
+  static TextStyle med26White = GoogleFonts.inter(
     color: AppColors.white,
-    fontWeight: FontWeight.w700,
-    fontSize: 30,
+    fontWeight: FontWeight.w500,
+    fontSize: 26,
   );
   static TextStyle bold20White = GoogleFonts.inter(
     color: AppColors.white,
