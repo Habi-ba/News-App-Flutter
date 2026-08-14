@@ -10,6 +10,7 @@ class AppTheme {
     iconTheme: IconThemeData(color: AppColors.black),
     canvasColor: AppColors.lightGray,
     appBarTheme: AppBarTheme(
+      iconTheme: IconThemeData(color: AppColors.black),
       color: AppColors.white,
       centerTitle: true,
       titleTextStyle: AppStyles.med20Dark,
@@ -31,6 +32,7 @@ class AppTheme {
     cardColor: AppColors.black,
     appBarTheme: AppBarTheme(
       color: AppColors.black,
+      iconTheme: IconThemeData(color: AppColors.white),
       centerTitle: true,
       titleTextStyle: AppStyles.med20White,
     ),
