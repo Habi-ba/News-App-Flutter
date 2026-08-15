@@ -1,7 +1,7 @@
 import '../../../../l10n/app_localizations.dart';
 
-String getLocalizedTitle(AppLocalizations key, String categoryKey) {
-  switch (categoryKey) {
+String getLocalizedTitle(AppLocalizations key, String categoryId) {
+  switch (categoryId) {
     case 'general':
       return key.general;
     case 'business':
@@ -17,6 +17,6 @@ String getLocalizedTitle(AppLocalizations key, String categoryKey) {
     case 'science':
       return key.science;
     default:
-      return categoryKey;
+      return categoryId;
   }
 }

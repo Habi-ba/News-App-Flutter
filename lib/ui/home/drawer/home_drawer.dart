@@ -12,7 +12,9 @@ import 'package:news/utils/size_utils.dart';
 import 'package:provider/provider.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({super.key});
+  HomeDrawer({super.key, required this.onDrawerItemClick});
+
+  final VoidCallback onDrawerItemClick;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class HomeDrawer extends StatelessWidget {
         InkWell(
           onTap: () {
             //todo: go to home
+            onDrawerItemClick();
           },
           child: DrawerItem(
             iconName: AppImages.home,

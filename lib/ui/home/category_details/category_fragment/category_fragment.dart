@@ -4,8 +4,12 @@ import 'package:news/l10n/app_localizations.dart';
 import 'package:news/ui/home/category_details/category_fragment/category_item.dart';
 import 'package:news/utils/size_utils.dart';
 
+typedef OnCategoryClick = void Function(ApiCategory);
+
 class CategoryFragment extends StatelessWidget {
-  const CategoryFragment({super.key});
+  final OnCategoryClick onCategoryClick;
+
+  const CategoryFragment({super.key, required this.onCategoryClick});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +31,15 @@ class CategoryFragment extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               itemBuilder: (context, index) {
-                return CategoryItem(
-                  category: categoriesList[index],
-                  index: index,
+                return InkWell(
+                  onTap: () {
+                    //todo:click
+                    onCategoryClick(categoriesList[index]);
+                  },
+                  child: CategoryItem(
+                    category: categoriesList[index],
+                    index: index,
+                  ),
                 );
               },
               separatorBuilder: (context, index) {
