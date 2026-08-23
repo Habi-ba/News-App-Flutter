@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news/api/api_manager.dart';
+import 'package:news/api/dio_manager.dart';
 import 'package:news/api/model/news/news_response.dart';
 import 'package:news/api/model/sources/source.dart';
 import 'package:news/ui/home/widget/main_error_widget.dart';
@@ -21,7 +21,7 @@ class _NewsWidgetState extends State<NewsWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<NewsResponse>(
-      future: ApiManager.getNewsBySourceId(widget.source.id ?? ''),
+      future: DioManager().getNewsBySourceId(widget.source.id ?? ''),
       builder: (context, snapshot) {
         print('STATE = ${snapshot.connectionState}');
         print('ERROR = ${snapshot.error}');
@@ -30,9 +30,9 @@ class _NewsWidgetState extends State<NewsWidget> {
           return MainLoadingWidget();
         } else if (snapshot.hasError) {
           return MainErrorWidget(
-            errorMesaage: 'Something Went Wrong',
+            errorMesaage: snapshot.error.toString(),
             onPressed: () {
-              ApiManager.getNewsBySourceId(widget.source.id ?? '');
+              DioManager().getNewsBySourceId(widget.source.id ?? '');
               setState(() {});
             },
           );
@@ -40,7 +40,7 @@ class _NewsWidgetState extends State<NewsWidget> {
           return MainErrorWidget(
             errorMesaage: snapshot.data?.message ?? 'Something Went Wrong',
             onPressed: () {
-              ApiManager.getNewsBySourceId(widget.source.id ?? '');
+              DioManager().getNewsBySourceId(widget.source.id ?? '');
               setState(() {});
             },
           );
