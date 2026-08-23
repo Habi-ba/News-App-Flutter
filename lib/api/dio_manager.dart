@@ -4,7 +4,6 @@ import 'package:news/api/model/news/news_response.dart';
 import 'package:news/api/model/sources/source_response.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-// https://newsapi.org/v2/top-headlines?country=us&apiKey=c5a0b85348ff47fdbbf825d16ce0a026
 class DioManager {
   final Dio dio = Dio(
     BaseOptions(
