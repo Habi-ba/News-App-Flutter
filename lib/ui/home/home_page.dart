@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:news/api/model/category/category.dart';
 import 'package:news/l10n/app_localizations.dart';
-import 'package:news/ui/home/category_details/category_fragment/category_fragment.dart';
-import 'package:news/ui/home/category_details/category_fragment/localized_category_title.dart';
 import 'package:news/ui/home/category_details/source/category_details.dart';
 import 'package:news/ui/home/drawer/home_drawer.dart';
 import 'package:news/utils/size_utils.dart';
+
+import 'category_fragment/category_fragment.dart';
+import 'category_fragment/localized_category_title.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
