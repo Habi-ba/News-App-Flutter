@@ -8,7 +8,7 @@ import 'package:news/api/model/sources/source_response.dart';
 
 //https://newsapi.org/v2/everything?q=bitcoin&apiKey=c5a0b85348ff47fdbbf825d16ce0a026
 class ApiManager {
-  static Future<SourceResponse> getSources(String categoryId) async {
+  Future<SourceResponse> getSources(String categoryId) async {
     try {
       Uri url = Uri.https(ApiConstants.baseUrl, EndPoints.sourceApi, {
         'apiKey': ApiConstants.apiKey,
