@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news/api/model/category/category.dart';
 import 'package:news/l10n/app_localizations.dart';
-import 'package:news/ui/home/category_details/category_fragment/category_item.dart';
 import 'package:news/utils/size_utils.dart';
+
+import 'category_item.dart';
 
 typedef OnCategoryClick = void Function(ApiCategory);
 
