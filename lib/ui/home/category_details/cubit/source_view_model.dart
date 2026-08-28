@@ -1,7 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:news/data/repository/sources/repository/source_repository.dart';
 import 'package:news/ui/home/category_details/cubit/source_states.dart';
 
+@injectable //=> means making an initialize of an object of this class
 class SourceViewModel extends Cubit<SourceStates> {
   SourceRepository sourceRepository;
 

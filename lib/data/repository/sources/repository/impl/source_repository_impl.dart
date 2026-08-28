@@ -1,9 +1,16 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:injectable/injectable.dart';
 import 'package:news/api/model/sources/source_response.dart';
 import 'package:news/data/repository/sources/data_sources/local/source_local_data_source.dart';
 import 'package:news/data/repository/sources/data_sources/remote/source_remote_data_source.dart';
 import 'package:news/data/repository/sources/repository/source_repository.dart';
 
+//for the injectable annotation
+//we do it in this way bec we dont want to create a direct  object of this class
+//we need it to be as an object of SourceRepository but we cant do it bec its abstract
+//so we can do an object for on of its concrete classes like this
+
+@Injectable(as: SourceRepository)
 class SourceRepositoryImpl implements SourceRepository{
   SourceLocalDataSource localDataSource;
   SourceRemoteDataSource remoteDataSource;

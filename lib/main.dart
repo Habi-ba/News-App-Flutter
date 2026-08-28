@@ -9,7 +9,10 @@ import 'package:news/utils/app_routes.dart';
 import 'package:news/utils/app_theme.dart';
 import 'package:provider/provider.dart';
 
+import 'data/di/di_inject.dart';
+
 void main() {
+  configureDependencies();
   Bloc.observer = MyBlocObserver();
   runApp(
     MultiProvider(

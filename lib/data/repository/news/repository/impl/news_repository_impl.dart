@@ -1,8 +1,10 @@
+import 'package:injectable/injectable.dart';
 import 'package:news/api/model/news/news_response.dart';
 import 'package:news/data/repository/news/repository/news_repository.dart';
 
 import '../../data_sources/remote/news_remote_data_source.dart';
 
+@Injectable(as: NewsRepository)
 class NewsRepositoryImpl implements NewsRepository {
   NewsRemoteDataSource remoteDataSource;
 
