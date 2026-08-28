@@ -53,6 +53,7 @@ class _SourceWidgetState extends State<SourceWidget> {
                   child: Padding(
                     padding: EdgeInsets.only(top: context.scaleHeight(20)),
                     child: NewsWidget(
+                        key: ValueKey(widget.sourcesList[selectedIndex].id),
                         source: widget.sourcesList[selectedIndex]),
                   ))
             ],

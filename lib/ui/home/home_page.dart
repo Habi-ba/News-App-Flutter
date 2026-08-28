@@ -5,6 +5,7 @@ import 'package:news/ui/home/category_details/category_fragment/category_fragmen
 import 'package:news/ui/home/category_details/category_fragment/localized_category_title.dart';
 import 'package:news/ui/home/category_details/source/category_details.dart';
 import 'package:news/ui/home/drawer/home_drawer.dart';
+import 'package:news/ui/home/search_screen.dart';
 import 'package:news/utils/size_utils.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,10 +30,24 @@ class _HomePageState extends State<HomePage> {
       ),
         appBar: AppBar(title: selectedCategory == null ?
         Text(AppLocalizations.of(context)!.home) : Text(
-            getLocalizedTitle(key, selectedCategory!.id)),),
+            getLocalizedTitle(key, selectedCategory!.id)),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const SearchScreen()),
+                );
+              },
+            ),
+          ],
+
+        ),
         backgroundColor: Theme
             .of(context)
             .scaffoldBackgroundColor,
+
         body: selectedCategory == null
             ?
         CategoryFragment(onCategoryClick: onCategoryItemClick,)

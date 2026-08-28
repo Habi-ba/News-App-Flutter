@@ -18,6 +18,7 @@ class AppTheme {
     textTheme: TextTheme(
       headlineSmall: AppStyles.med20Dark,
       titleLarge: AppStyles.med24Dark,
+
       labelMedium: AppStyles.bold20White,
       labelLarge: AppStyles.bold24Dark,
       bodyMedium: AppStyles.med24Dark,

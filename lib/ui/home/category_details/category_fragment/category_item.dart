@@ -38,7 +38,6 @@ class CategoryItem extends StatelessWidget {
           ),
         ),
 
-        // زرار View All — نفس الفكرة
         Positioned(
           bottom: context.scaleHeight(20),
           right: isEven ? context.scaleWidth(20) : null,
