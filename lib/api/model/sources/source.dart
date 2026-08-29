@@ -1,12 +1,9 @@
-/// id : "abc-news"
-/// name : "ABC News"
-/// description : "Your trusted source for breaking news, analysis, exclusive interviews, headlines, and videos at ABCNews.com."
-/// url : "https://abcnews.go.com"
-/// category : "general"
-/// language : "en"
-/// country : "us"
+import 'package:hive_ce/hive.dart';
 
-class Source {
+part 'source.g.dart';
+
+@HiveType(typeId: 0)
+class Source extends HiveObject {
   Source({
     this.id,
     this.name,
@@ -27,12 +24,19 @@ class Source {
     country = json['country'];
   }
 
+  @HiveField(0)
   String? id;
+  @HiveField(1)
   String? name;
+  @HiveField(2)
   String? description;
+  @HiveField(3)
   String? url;
+  @HiveField(4)
   String? category;
+  @HiveField(5)
   String? language;
+  @HiveField(6)
   String? country;
 
   Map<String, dynamic> toJson() {
