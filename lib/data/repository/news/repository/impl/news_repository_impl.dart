@@ -13,7 +13,8 @@ class NewsRepositoryImpl implements NewsRepository {
       {required this.remoteDataSource, required this.newsLocalDataSource});
 
   @override
-  Future<NewsResponse?> getNewsBySourceId(String sourceId) async {
+  Future<NewsResponse?> getNewsBySourceId(String sourceId,
+      {int page = 1}) async {
     final connectivityResult = await Connectivity().checkConnectivity();
     final hasConnection = connectivityResult.contains(
         ConnectivityResult.mobile) ||
@@ -21,8 +22,12 @@ class NewsRepositoryImpl implements NewsRepository {
 
     if (hasConnection) {
       try {
-        var newsResponse = await remoteDataSource.getNewsBySourceId(sourceId);
-        await newsLocalDataSource.saveNews(newsResponse, sourceId);
+        var newsResponse =
+        await remoteDataSource.getNewsBySourceId(sourceId, page: page); // ✅
+
+        if (page == 1) {
+          await newsLocalDataSource.saveNews(newsResponse, sourceId);
+        }
         return newsResponse;
       } catch (e) {
         return await newsLocalDataSource.getNewsBySourceId(sourceId);
@@ -31,5 +36,4 @@ class NewsRepositoryImpl implements NewsRepository {
       return await newsLocalDataSource.getNewsBySourceId(sourceId);
     }
   }
-
 }

@@ -8,16 +8,15 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
   NewsRemoteDataSourceImpl({required this.apiManager});
 
   @override
-  Future<NewsResponse> getNewsBySourceId(String sourceId) {
-    return apiManager.getNewsBySourceId(sourceId);
+  Future<NewsResponse> getNewsBySourceId(String sourceId, {int page = 1}) {
+    return apiManager.getNewsBySourceId(sourceId, page: page);
   }
 }
 
 //todo:dio
 class NewsRemoteDataSourceDio implements NewsRemoteDataSource {
   @override
-  Future<NewsResponse> getNewsBySourceId(String sourceID) {
-    // TODO: implement getNewsBySourceId
+  Future<NewsResponse> getNewsBySourceId(String sourceID, {int page = 1}) {
     throw UnimplementedError();
   }
 }
@@ -25,8 +24,7 @@ class NewsRemoteDataSourceDio implements NewsRemoteDataSource {
 //todo:retrofit
 class NewsRemoteDataSourceRetroFit implements NewsRemoteDataSource {
   @override
-  Future<NewsResponse> getNewsBySourceId(String sourceID) {
-    // TODO: implement getNewsBySourceId
+  Future<NewsResponse> getNewsBySourceId(String sourceID, {int page = 1}) {
     throw UnimplementedError();
   }
 }

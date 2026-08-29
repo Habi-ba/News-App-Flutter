@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news/api/api_manager.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/api/model/sources/source.dart';
 import 'package:news/data/di/di.dart';
 import 'package:news/ui/home/category_details/news/cubit/news_states.dart';
@@ -23,86 +23,20 @@ class NewsWidget extends StatefulWidget {
 }
 
 class _NewsWidgetState extends State<NewsWidget> {
-  final List<News> _newsList = [];
-  final ScrollController _scrollController = ScrollController();
   NewsViewModel viewModel = NewsViewModel(
     newsRepository: injectNewsRepository(),
   );
-
-  int _currentPage = 1;
-  bool _isLoadingMore = false;
-  bool _hasMore = true;
-  bool _isFirstLoading = true;
-  String? _errorMessage;
 
   @override
   void initState() {
     super.initState();
     viewModel.getNewsBySourceId(widget.source.id!);
-    _loadNews();
-    _scrollController.addListener(_onScroll);
   }
 
   @override
   void dispose() {
-    _scrollController.removeListener(_onScroll);
-    _scrollController.dispose();
+    viewModel.close();
     super.dispose();
-  }
-
-  void _onScroll() {
-    if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent - 200 &&
-        !_isLoadingMore &&
-        _hasMore) {
-      _loadNews();
-    }
-  }
-
-  Future<void> _loadNews() async {
-    if (_isLoadingMore || !_hasMore) return;
-
-    setState(() {
-      _isLoadingMore = true;
-      _errorMessage = null;
-    });
-
-    try {
-      final response = await ApiManager.getNewsBySourceId(
-        widget.source.id ?? '',
-        page: _currentPage,
-      );
-
-      final newArticles = response.articles ?? [];
-
-      setState(() {
-        _newsList.addAll(newArticles);
-        _currentPage++;
-        _isLoadingMore = false;
-        _isFirstLoading = false;
-        if (newArticles.length < 20) {
-          _hasMore = false;
-        }
-      });
-    } catch (e, stackTrace) {
-      print('NEWS LOADING ERROR: $e');
-      print('STACK TRACE: $stackTrace');
-      setState(() {
-        _isLoadingMore = false;
-        _isFirstLoading = false;
-        _errorMessage = AppLocalizations.of(context)!.something_went_wrong;
-      });
-    }
-  }
-
-  Future<void> _refresh() async {
-    setState(() {
-      _newsList.clear();
-      _currentPage = 1;
-      _hasMore = true;
-      _isFirstLoading = true;
-    });
-    await _loadNews();
   }
 
   @override
@@ -116,21 +50,22 @@ class _NewsWidgetState extends State<NewsWidget> {
 
         if (state is NewsErrorState) {
           return MainErrorWidget(
-            errorMesaage: state.errorMessage ?? AppLocalizations.of(context)!.something_went_wrong,
+            errorMesaage: state.errorMessage,
             onPressed: () => viewModel.getNewsBySourceId(widget.source.id ?? ''),
           );
         }
 
-        // نستخرج الليست والـ hasMore من أي state فيها بيانات
         List<News>? newsList;
         bool hasMore = false;
+        bool isLoadingMore = false;
 
         if (state is NewsSuccessState) {
           newsList = state.newsList;
           hasMore = state.hasMore;
         } else if (state is NewsLoadingMoreState) {
           newsList = state.currentList;
-          hasMore = true; // لسه بيحمّل صفحة جديدة
+          hasMore = true;
+          isLoadingMore = true;
         }
 
         if (newsList == null || newsList.isEmpty) {
@@ -143,10 +78,11 @@ class _NewsWidgetState extends State<NewsWidget> {
         }
 
         return RefreshIndicator(
-          onRefresh: () => viewModel.refresh(),
+          onRefresh: () async => viewModel.refresh(),
           child: NotificationListener<ScrollNotification>(
             onNotification: (scrollInfo) {
               if (hasMore &&
+                  !isLoadingMore &&
                   scrollInfo.metrics.pixels >=
                       scrollInfo.metrics.maxScrollExtent - 200) {
                 viewModel.loadMore();
@@ -154,7 +90,7 @@ class _NewsWidgetState extends State<NewsWidget> {
               return false;
             },
             child: ListView.separated(
-              itemCount: newsList.length + (state is NewsLoadingMoreState ? 1 : 0),
+              itemCount: newsList.length + (isLoadingMore ? 1 : 0),
               separatorBuilder: (context, index) =>
                   SizedBox(height: context.scaleHeight(10)),
               itemBuilder: (context, index) {
@@ -176,6 +112,3 @@ class _NewsWidgetState extends State<NewsWidget> {
     );
   }
 }
-
-
-// );

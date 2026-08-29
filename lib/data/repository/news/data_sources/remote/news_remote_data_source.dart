@@ -1,5 +1,7 @@
+
 import '../../../../../api/model/news/news_response.dart';
 
 abstract class NewsRemoteDataSource {
-  Future<NewsResponse> getNewsBySourceId(String sourceID);
+  Future<NewsResponse> getNewsBySourceId(String sourceId,
+      {int page = 1}); // ✅ إضافة page
 }
