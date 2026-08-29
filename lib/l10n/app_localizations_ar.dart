@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -64,4 +65,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get viewFullArticle => 'عرض المقال كاملاً';
+
+  @override
+  String get no_news => 'لا توجد أخبار';
+
+  @override
+  String get view_full_article => 'عرض المقال كامل';
+
+  @override
+  String get search_for_news_articles => 'ابحث عن الأخبار';
+
+  @override
+  String get search => 'بحث';
+
+  @override
+  String get something_went_wrong => 'حدث خطأ ما';
+
+  @override
+  String get no_description_found => ' لا يوجد محتوى  ';
 }

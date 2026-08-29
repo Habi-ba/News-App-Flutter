@@ -211,6 +211,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View Full Article'**
   String get viewFullArticle;
+
+  /// No description provided for @no_news.
+  ///
+  /// In en, this message translates to:
+  /// **'No News Found'**
+  String get no_news;
+
+  /// No description provided for @view_full_article.
+  ///
+  /// In en, this message translates to:
+  /// **'View Full Article'**
+  String get view_full_article;
+
+  /// No description provided for @search_for_news_articles.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for news articles'**
+  String get search_for_news_articles;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @something_went_wrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something Went Wrong'**
+  String get something_went_wrong;
+
+  /// No description provided for @no_description_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No description available'**
+  String get no_description_found;
 }
 
 class _AppLocalizationsDelegate

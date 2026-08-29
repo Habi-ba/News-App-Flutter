@@ -6,8 +6,9 @@ import 'package:news/ui/home/widget/main_loading_widget.dart';
 import 'package:news/utils/size_utils.dart';
 
 import '../../../../api/model/news/news.dart';
-import 'full_article_screen.dart';
+import '../../../../l10n/app_localizations.dart';
 import 'new_item.dart';
+import 'new_preview_helper.dart';
 
 class NewsWidget extends StatefulWidget {
   const NewsWidget({super.key, required this.source});
@@ -82,7 +83,7 @@ class _NewsWidgetState extends State<NewsWidget> {
       setState(() {
         _isLoadingMore = false;
         _isFirstLoading = false;
-        _errorMessage = 'Something Went Wrong';
+        _errorMessage = AppLocalizations.of(context)!.something_went_wrong;
       });
     }
   }
@@ -113,7 +114,7 @@ class _NewsWidgetState extends State<NewsWidget> {
     if (_newsList.isEmpty) {
       return Center(
         child: Text(
-          'No News Found !',
+          AppLocalizations.of(context)!.no_news,
           style: Theme
               .of(context)
               .textTheme
@@ -138,118 +139,14 @@ class _NewsWidgetState extends State<NewsWidget> {
           }
 
           return GestureDetector(
-            onTap: () => _showPreview(context, _newsList[index]),
+            onTap: () => showNewsPreview(context, _newsList[index]),
             child: NewsItem(news: _newsList[index]),
           );
         },
       ),
     );
   }
-
-  void _showPreview(BuildContext context, News article) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      //constraints: BoxConstraints(),
-      builder: (context) {
-        return Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: context.scaleWidth(14),
-            vertical: context.scaleHeight(14),
-          ),
-          //padding: EdgeInsets.all(context.scaleWidth(15)),
-          decoration: BoxDecoration(
-            color: Theme
-                .of(context)
-                .dividerColor,
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(16),
-                  ),
-                  child:
-                  article.urlToImage != null
-                      ? Image.network(
-                    article.urlToImage!,
-                    fit: BoxFit.fill,
-                    errorBuilder:
-                        (context, error, stackTrace) =>
-                        Container(
-                          height: 180,
-                          color: Colors.grey[800],
-                          child: const Icon(
-                            Icons.image_not_supported,
-                            color: Colors.white54,
-                          ),
-                        ),
-                  )
-                      : Container(
-                    height: 180,
-                    color: Colors.grey[800],
-                    child: const Icon(
-                      Icons.image_not_supported,
-                      color: Colors.white54,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Text(
-                    article.description ?? 'No description available',
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .displaySmall,
-                    maxLines: 5,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: SizedBox(
-                    height: context.scaleHeight(56),
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => FullArticleScreen(news: article),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: ContinuousRectangleBorder(
-                          borderRadius: BorderRadiusGeometry.circular(16),
-                        ),
-                        backgroundColor: Theme
-                            .of(context)
-                            .cardColor,
-                      ),
-                      child: Text(
-                        "View Full Article",
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .displayMedium,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
 }
+
+
 // );

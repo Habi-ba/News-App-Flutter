@@ -17,5 +17,12 @@
   "language": "اللغة",
   "english": "الإنجليزية",
   "arabic": "العربية",
-  "viewFullArticle": "عرض المقال كاملاً"
+  "viewFullArticle": "عرض المقال كاملاً",
+  "no_news": "لا توجد أخبار",
+  "view_full_article": "عرض المقال كامل",
+  "search_for_news_articles": "ابحث عن الأخبار",
+  "search": "بحث",
+  "something_went_wrong": "حدث خطأ ما",
+  "no_description_found": " لا يوجد محتوى  "
+
 }

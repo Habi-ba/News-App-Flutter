@@ -2,11 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:news/api/api_manager.dart';
+import 'package:news/l10n/app_localizations.dart';
 import 'package:news/utils/size_utils.dart';
 
 import '../../../api/model/news/news.dart';
-import 'category_details/news/full_article_screen.dart';
 import 'category_details/news/new_item.dart';
+import 'category_details/news/new_preview_helper.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -17,6 +18,9 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
+
+  //used to manage user input time
+  //if timer is not initialized , every letter will act to be a new request
   Timer? _debounce;
 
   List<News> _results = [];
@@ -55,7 +59,7 @@ class _SearchScreenState extends State<SearchScreen> {
     } catch (e) {
       setState(() {
         _isLoading = false;
-        _errorMessage = 'Something Went Wrong';
+        _errorMessage = AppLocalizations.of(context)!.something_went_wrong;
       });
     }
   }
@@ -79,36 +83,80 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Search')),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(16)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(height: context.scaleHeight(12)),
-            TextField(
-              controller: _searchController,
-              onChanged: _onSearchChanged,
-              decoration: InputDecoration(
-                hintText: 'Search',
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon:
-                    _searchController.text.isNotEmpty
-                        ? IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: _clearSearch,
-                        )
-                        : null,
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(16)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(height: context.scaleHeight(16)),
+
+                Center(
+                  child: Text(
+                    AppLocalizations.of(context)!.search,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ),
-              ),
+
+                SizedBox(height: context.scaleHeight(16)),
+
+                TextField(
+                  controller: _searchController,
+                  onChanged: _onSearchChanged,
+                  style: Theme.of(context).textTheme.bodySmall,
+                  decoration: InputDecoration(
+                    hintText: AppLocalizations.of(context)!.search,
+                    hintStyle: Theme.of(context).textTheme.headlineSmall,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                    suffixIcon:
+                        _searchController.text.isNotEmpty
+                            ? IconButton(
+                              icon: Icon(
+                                Icons.close,
+                                color: Theme.of(context).iconTheme.color,
+                              ),
+                              onPressed: _clearSearch,
+                            )
+                            : null,
+                    filled: true,
+                    fillColor: Colors.transparent,
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: context.scaleHeight(16),
+                      horizontal: context.scaleWidth(15),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).dividerColor,
+                        width: 1,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).dividerColor,
+                        width: 1,
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: context.scaleHeight(16)),
+
+                Expanded(child: _buildBody()),
+              ],
             ),
-            SizedBox(height: context.scaleHeight(16)),
-            Expanded(child: _buildBody()),
-          ],
+          ),
         ),
       ),
     );
@@ -118,7 +166,7 @@ class _SearchScreenState extends State<SearchScreen> {
     if (!_isSearched) {
       return Center(
         child: Text(
-          'Search for news articles',
+          AppLocalizations.of(context)!.search_for_news_articles,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
       );
@@ -135,7 +183,7 @@ class _SearchScreenState extends State<SearchScreen> {
     if (_results.isEmpty) {
       return Center(
         child: Text(
-          'No results found',
+          AppLocalizations.of(context)!.no_news,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
       );
@@ -149,12 +197,8 @@ class _SearchScreenState extends State<SearchScreen> {
         final article = _results[index];
         return GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => FullArticleScreen(news: article),
-              ),
-            );
+            FocusScope.of(context).unfocus();
+            showNewsPreview(context, article);
           },
           child: NewsItem(news: article),
         );

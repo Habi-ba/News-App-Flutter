@@ -74,5 +74,12 @@
   "viewFullArticle": "View Full Article",
   "@viewFullArticle": {
     "description": "Button to open full article"
-  }
+  },
+  "no_news": "No News Found",
+  "view_full_article": "View Full Article",
+  "search_for_news_articles": "Search for news articles",
+  "search": "Search",
+  "something_went_wrong": "Something Went Wrong",
+  "no_description_found": "No description available"
+
 }
