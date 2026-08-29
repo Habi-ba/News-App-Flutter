@@ -22,7 +22,9 @@ class NewsWidget extends StatefulWidget {
 class _NewsWidgetState extends State<NewsWidget> {
   NewsViewModel viewModel = NewsViewModel(
     newsRepository: injectNewsRepository(),
-  )@override
+  );
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();

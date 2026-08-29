@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import 'package:news/l10n/app_localizations.dart';
 import 'package:news/providers/app_language_provider.dart';
 import 'package:news/providers/app_theme_provider.dart';
@@ -9,7 +10,13 @@ import 'package:news/utils/app_routes.dart';
 import 'package:news/utils/app_theme.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+import 'hive/hive_registrar.g.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapters();
+
   Bloc.observer = MyBlocObserver();
   runApp(
     MultiProvider(

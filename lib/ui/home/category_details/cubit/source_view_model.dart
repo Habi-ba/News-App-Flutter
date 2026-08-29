@@ -14,18 +14,20 @@ class SourceViewModel extends Cubit<SourceStates> {
 
   void getSources(String categoryId) async {
     try {
-      //todo:loading
       emit(SourceLoadingState());
-      //todo:call api
       var response = await sourceRepository.getSources(categoryId);
-      if (response.status == 'error') {
-        //todo:error
-        emit(SourceErrorState(errorMessage: response.message!));
-      }
-      if (response.status == 'ok') {
-        //todo:success
 
-        emit(SourceSuccessState(sourcesList: response.source!));
+      if (response == null) {
+        emit(SourceErrorState(
+            errorMessage: 'No internet connection and no cached data available'));
+        return;
+      }
+
+      if (response.status == 'error') {
+        emit(SourceErrorState(
+            errorMessage: response.message ?? 'Unexpected Error Has Occurred'));
+      } else if (response.status == 'ok') {
+        emit(SourceSuccessState(sourcesList: response.source ?? []));
       }
     } catch (e) {
       emit(SourceErrorState(errorMessage: e.toString()));

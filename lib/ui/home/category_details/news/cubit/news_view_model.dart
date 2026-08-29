@@ -10,13 +10,20 @@ class NewsViewModel extends Cubit<NewsStates> {
   //todo:hold data _handle Logic
   void getNewsBySourceId(String sourceId) async {
     try {
-      //todo:loading
       emit(NewsLoadingState());
       var response = await newsRepository.getNewsBySourceId(sourceId);
+
+      if (response == null) {
+        emit(NewsErrorState(
+            errorMessage: 'No Internet Connection ,Please Check Your Network'));
+        return;
+      }
+
       if (response.status == 'error') {
-        emit(NewsErrorState(errorMessage: response.message!));
+        emit(NewsErrorState(
+            errorMessage: response.message ?? 'Unexpected Error Has Occurred'));
       } else if (response.status == 'ok') {
-        emit(NewsSuccessState(newsList: response.articles!));
+        emit(NewsSuccessState(newsList: response.articles ?? []));
       }
     } catch (e) {
       emit(NewsErrorState(errorMessage: e.toString()));

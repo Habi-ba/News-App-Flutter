@@ -11,25 +11,23 @@ class SourceRepositoryImpl implements SourceRepository{
   SourceRepositoryImpl(
       {required this.remoteDataSource, required this.localDataSource});
   @override
-  Future<SourceResponse> getSources(String categoryId) async {
-    //todo:internet=>remote ds
-    final List<ConnectivityResult> connectivityResult = await (Connectivity()
-        .checkConnectivity());
-    if (connectivityResult.contains(ConnectivityResult.mobile) ||
-        connectivityResult.contains(ConnectivityResult.wifi)) {
-      //todo:internet=>remote ds
-      //todo:get sources by using  remote ds
+  Future<SourceResponse?> getSources(String categoryId) async {
+    final connectivityResult = await Connectivity().checkConnectivity();
+    final hasConnection = connectivityResult.contains(
+        ConnectivityResult.mobile) ||
+        connectivityResult.contains(ConnectivityResult.wifi);
 
-      var sourceResponse = await remoteDataSource.getSources(categoryId);
-      //todo:save response
-      localDataSource.saveSources(sourceResponse);
-      return sourceResponse;
+    if (hasConnection) {
+      try {
+        var sourceResponse = await remoteDataSource.getSources(categoryId);
+        await localDataSource.saveSources(sourceResponse, categoryId);
+        return sourceResponse;
+      } catch (e) {
+        return await localDataSource.getSources(categoryId);
+      }
     } else {
-      //todo:no Internet=> local ds
-      //todo:get sources by using  local ds
-      var sourceResponse = await localDataSource.getSources(categoryId);
-      return sourceResponse;
+      return await localDataSource.getSources(categoryId);
     }
+  }
 
-
-  }}
+}
